@@ -7,6 +7,8 @@
 //
 
 import UIKit
+//import FirebaseAuth
+import ProgressHUD
 
 class LogInViewController: UIViewController {
 
@@ -20,6 +22,16 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         logInButton.layer.cornerRadius = 26
+        
+        // setup tap gesture recognizer
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.cancelsTouchesInView = false
+    }
+    
+    // tap the screen to dismiss keyboard
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,16 +66,29 @@ class LogInViewController: UIViewController {
     
     @IBAction func logInButtonPressed(_ sender: UIButton) {
         
+        let email = (usernameTextField.text ?? "").lowercased()
+        let password = passwordTextField.text ?? ""
+        
+        // email & pasword checking
+        guard !email.isEmpty else   { ProgressHUD.showError("Please enter your email."); return }
+        guard !password.isEmpty else   { ProgressHUD.showError("Please enter your password."); return }
+        guard email.isValidEmail() else { ProgressHUD.showError("You entered an invalid email."); return }
+        guard password.count > 5 else { ProgressHUD.showError("Your password must has at least 6 characters."); return }
+        
+        actionLogIn(email: email, password: password)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func actionLogIn(email: String, password: String) {
+        ProgressHUD.show(nil, interaction: false)
+        
+        NetworkParameters.firebaseAuth.signIn(withEmail: email, password: password) { (result, error) in
+            if let er = error {
+                ProgressHUD.showError(er.localizedDescription)
+            } else {
+                self.performSegue(withIdentifier: "logInToMain", sender: self)
+            }
+        }
     }
-    */
-
+    
+    
 }

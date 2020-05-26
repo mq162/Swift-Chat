@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="FriendCell" customModule="Swift_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="7us-pf-KTp">
+                        <rect key="frame" x="16" y="10.5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="2M2-gu-Qwl"/>
+                            <constraint firstAttribute="height" constant="50" id="6uu-dm-OGL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quang Pham" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kl-6d-ZVl" userLabel="Name Label">
+                        <rect key="frame" x="82" y="10.5" width="222" height="25"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pmquang@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8G-Ib-bpG" userLabel="Email Label">
+                        <rect key="frame" x="82" y="33.5" width="222" height="18"/>
+                        <fontDescription key="fontDescription" name="AvenirNext-UltraLightItalic" family="Avenir Next" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="38L-Hx-56F" userLabel="Seperator">
+                        <rect key="frame" x="16" y="71" width="288" height="0.0"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.20000000000000001" id="uGl-If-NhF"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5Kl-6d-ZVl" firstAttribute="top" secondItem="7us-pf-KTp" secondAttribute="top" id="6B5-vq-9AJ"/>
+                    <constraint firstItem="K8G-Ib-bpG" firstAttribute="leading" secondItem="7us-pf-KTp" secondAttribute="trailing" constant="16" id="Dht-s2-AoF"/>
+                    <constraint firstItem="7us-pf-KTp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Tn3-O0-afz"/>
+                    <constraint firstItem="7us-pf-KTp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="UjE-eh-mDk"/>
+                    <constraint firstItem="K8G-Ib-bpG" firstAttribute="top" secondItem="5Kl-6d-ZVl" secondAttribute="bottom" constant="-2" id="aOU-Zg-jfs"/>
+                    <constraint firstAttribute="bottom" secondItem="38L-Hx-56F" secondAttribute="bottom" id="btX-0e-mUV"/>
+                    <constraint firstAttribute="trailing" secondItem="38L-Hx-56F" secondAttribute="trailing" constant="16" id="dOL-4g-5J3"/>
+                    <constraint firstAttribute="trailing" secondItem="5Kl-6d-ZVl" secondAttribute="trailing" constant="16" id="hE5-cf-Tye"/>
+                    <constraint firstItem="5Kl-6d-ZVl" firstAttribute="leading" secondItem="7us-pf-KTp" secondAttribute="trailing" constant="16" id="hzX-0q-9uq"/>
+                    <constraint firstItem="38L-Hx-56F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="mAa-bj-qQy"/>
+                    <constraint firstAttribute="trailing" secondItem="K8G-Ib-bpG" secondAttribute="trailing" constant="16" id="wc8-p5-aUs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="avataImage" destination="7us-pf-KTp" id="0Rj-9m-OD0"/>
+                <outlet property="emailLabel" destination="K8G-Ib-bpG" id="CKf-SU-jG1"/>
+                <outlet property="nameLabel" destination="5Kl-6d-ZVl" id="yTA-TY-zqw"/>
+            </connections>
+            <point key="canvasLocation" x="143.47826086956522" y="138.95089285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="profile-pic" width="200" height="200"/>
+    </resources>
+</document>

@@ -10,5 +10,8 @@ target 'Swift Chat' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'ProgressHUD'
+  pod 'MessageKit'
+  pod 'Kingfisher'
 
 end
