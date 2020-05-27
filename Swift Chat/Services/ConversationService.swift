@@ -50,7 +50,3 @@ class ConversationService {
     
 }
 
-public enum FirestoreResponse {
-  case success
-  case failure
-}

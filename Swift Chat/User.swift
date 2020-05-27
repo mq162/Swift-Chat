@@ -6,11 +6,9 @@
 //
 
 import UIKit
-import MessageKit
 
 struct User: Codable  {
     
-    //var senderId: String
     var uid: String
     var displayName: String
     var profilePicLink: String?

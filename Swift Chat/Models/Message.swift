@@ -6,7 +6,7 @@
 //  Copyright © 2020 Minh Quang. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 class Message: Codable {

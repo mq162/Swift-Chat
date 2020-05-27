@@ -15,17 +15,19 @@ import MapKit
 
 class MessageViewController: MessagesViewController {
     
-    var chatListener: ListenerRegistration?
-    let outgoingAvatarOverlap: CGFloat = 17.5
+    //var chatListener: ListenerRegistration?
     private var messages = [MKMessage]()
-    var convo = ConversationService()
+    //private var convo = ConversationService()
     var conversation = Conversation()
-    var messageService = MessageService()
-    let refreshControl = UIRefreshControl()
+    private var messageService = MessageService()
+    private var imageManager = ImagePickerManager()
+    private let refreshControl = UIRefreshControl()
+    
+    private let outgoingAvatarOverlap: CGFloat = 17.5
+    private var messageToDisplay: Int = 12
     var currentName: String = ""
     var profileLink: String = ""
     var otherName: String = ""
-    private var messageToDisplay: Int = 12
     
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -43,6 +45,7 @@ class MessageViewController: MessagesViewController {
         configureMessageCollectionView()
         configureMessageInputBar()
         fetchMessages()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {
@@ -62,15 +65,15 @@ class MessageViewController: MessagesViewController {
         }
     }
     
-    func messageTotalCount() -> Int {
-
-        return messages.count
-    }
-    
-    func messageLoadedCount() -> Int {
-
-        return min(messageToDisplay, messageTotalCount())
-    }
+//    func messageTotalCount() -> Int {
+//
+//        return messages.count
+//    }
+//
+//    func messageLoadedCount() -> Int {
+//
+//        return min(messageToDisplay, messageTotalCount())
+//    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
@@ -91,7 +94,7 @@ class MessageViewController: MessagesViewController {
 //MARK: - Action send messages
     
     func sendMessage(text: String?, photo: UIImage?) {
-        MessageService.send(convoId: conversation.id, userIDs: conversation.userIDs, senderName: currentName, picLink: profileLink, text: text, photo: photo)
+        messageService.send(convoId: conversation.id, userIDs: conversation.userIDs, senderName: currentName, picLink: profileLink, text: text, photo: photo)
     }
     
 //MARK: - Configure CollectionView
@@ -189,19 +192,20 @@ class MessageViewController: MessagesViewController {
 
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-//        let alertPhoto = UIAlertAction(title: "Photo", style: .default) { action in
-//            ImagePicker.photoLibrary(target: self, edit: true)
-//        }
+        let alertPhoto = UIAlertAction(title: "Photo", style: .default) { action in
+            self.actionImage()
+            //ImagePicker.photoLibrary(target: self, edit: true)
+        }
         let alertLocation = UIAlertAction(title: "Location", style: .default) { action in
             self.actionLocation()
         }
 
         let configuration    = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
-        //let imagePhoto        = UIImage(systemName: "photo", withConfiguration: configuration)
+        let imagePhoto       = UIImage(systemName: "photo", withConfiguration: configuration)
         let imageLocation    = UIImage(systemName: "location", withConfiguration: configuration)
 
         
-        //alertPhoto.setValue(imagePhoto, forKey: "image");        alert.addAction(alertPhoto)
+        alertPhoto.setValue(imagePhoto, forKey: "image");        alert.addAction(alertPhoto)
         alertLocation.setValue(imageLocation, forKey: "image");    alert.addAction(alertLocation)
 
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -211,6 +215,12 @@ class MessageViewController: MessagesViewController {
     
     func actionLocation() {
         sendMessage(text: nil, photo: nil)
+    }
+    
+    func actionImage() {
+        imageManager.pickImage(from: self) { [weak self] (image) in
+            self?.sendMessage(text: nil, photo: image)
+        }
     }
     
     
@@ -360,8 +370,8 @@ extension MessageViewController: MessagesDisplayDelegate {
         avatarView.layer.borderColor = UIColor.primaryColor.cgColor
     }
     
-    // MARK: - Location Messages
-    //---------------------------------------------------------------------------------------------------------------------------------------------
+// MARK: - Location Messages
+    
     func annotationViewForLocation(message: MessageType, at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> MKAnnotationView? {
 
         if let image = UIImage(named: "mkchat_annotation") {
@@ -373,13 +383,11 @@ extension MessageViewController: MessagesDisplayDelegate {
         return nil
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------
     func animationBlockForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> ((UIImageView) -> Void)? {
 
         return nil
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------
     func snapshotOptionsForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> LocationMessageSnapshotOptions {
 
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -410,27 +418,27 @@ extension MessageViewController: InputBarAccessoryViewDelegate {
 
     }
     
-    private func insertMessages(_ data: [Any]) {
-        for component in data {
-            if let str = component as? String {
-                let messageId = UUID().uuidString
-                let sentDate = Date()
-                NetworkParameters.db.collection("conversations").document(conversation.id).setData(["id": conversation.id, "userIDs": conversation.userIDs, "lastUpdate": Int(Date().timeIntervalSince1970), "lastMessage": str])
-                NetworkParameters.db.collection("conversations").document(conversation.id).collection("messages").addDocument(data: [
-                    "messageId": messageId,
-                    "sentDate": sentDate,
-                    "text": str, 
-                    "user": currentName,
-                    "userId": NetworkParameters().currentUserID()!,
-                    "senderAvatar": profileLink
-                ]) { (error) in
-                    if error != nil {
-                        ProgressHUD.showError(error?.localizedDescription)
-                    }
-                }
-            }
-        }
-        
-    }
+//    private func insertMessages(_ data: [Any]) {
+//        for component in data {
+//            if let str = component as? String {
+//                let messageId = UUID().uuidString
+//                let sentDate = Date()
+//                NetworkParameters.db.collection("conversations").document(conversation.id).setData(["id": conversation.id, "userIDs": conversation.userIDs, "lastUpdate": Int(Date().timeIntervalSince1970), "lastMessage": str])
+//                NetworkParameters.db.collection("conversations").document(conversation.id).collection("messages").addDocument(data: [
+//                    "messageId": messageId,
+//                    "sentDate": sentDate,
+//                    "text": str,
+//                    "user": currentName,
+//                    "userId": NetworkParameters().currentUserID()!,
+//                    "senderAvatar": profileLink
+//                ]) { (error) in
+//                    if error != nil {
+//                        ProgressHUD.showError(error?.localizedDescription)
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
     
 }

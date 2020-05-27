@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class NetworkParameters {
+struct NetworkParameters {
     
     static let db = Firestore.firestore()
     static let firebaseAuth = Auth.auth()
@@ -27,3 +27,9 @@ class NetworkParameters {
     static var networkConnected = true
     
 }
+
+enum FirestoreResponse {
+  case success
+  case failure
+}
+

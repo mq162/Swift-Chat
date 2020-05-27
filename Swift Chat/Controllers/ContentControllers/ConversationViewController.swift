@@ -27,10 +27,10 @@ class ConversationViewController: ContentViewController {
 
     }
         
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        convoService.stopObservers()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        convoService.stopObservers()
+//    }
     
     func fetchConversations() {
       convoService.currentConversations {[weak self] conversation in

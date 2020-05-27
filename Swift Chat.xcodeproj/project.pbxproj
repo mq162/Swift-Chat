@@ -23,6 +23,7 @@
 		1842CD0B24740BB700E739E7 /* MessageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1842CD0A24740BB700E739E7 /* MessageServices.swift */; };
 		1857D8FD246D7C1400568CD6 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857D8FC246D7C1400568CD6 /* UIImageView+Extension.swift */; };
 		185BEE612472CBB30054891B /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185BEE602472CBB30054891B /* AuthServices.swift */; };
+		1862EC2E247D4B5B00D73FAD /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862EC2D247D4B5B00D73FAD /* ImagePickerManager.swift */; };
 		1889202224710F1800DD514C /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889202124710F1800DD514C /* Conversation.swift */; };
 		188920242471171E00DD514C /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188920232471171E00DD514C /* ComposeViewController.swift */; };
 		188C1B30246AD4DD00B6B806 /* AvatarPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C1B2F246AD4DD00B6B806 /* AvatarPickerViewController.swift */; };
@@ -75,6 +76,7 @@
 		1842CD0A24740BB700E739E7 /* MessageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServices.swift; sourceTree = "<group>"; };
 		1857D8FC246D7C1400568CD6 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		185BEE602472CBB30054891B /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
+		1862EC2D247D4B5B00D73FAD /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		1889202124710F1800DD514C /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		188920232471171E00DD514C /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		188C1B2F246AD4DD00B6B806 /* AvatarPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				18E55D9F247C052C008F54B3 /* LocationManager.swift */,
+				1862EC2D247D4B5B00D73FAD /* ImagePickerManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				18CC39A124668BA10048955B /* LogInViewController.swift in Sources */,
 				18CC399F24668B870048955B /* RegisterViewController.swift in Sources */,
 				1889202224710F1800DD514C /* Conversation.swift in Sources */,
+				1862EC2E247D4B5B00D73FAD /* ImagePickerManager.swift in Sources */,
 				18D4EDAA2470188D004020CF /* FirestoreService.swift in Sources */,
 				1814580F246C344100CF9F81 /* SideMenuCell.swift in Sources */,
 				18E55DA0247C052C008F54B3 /* LocationManager.swift in Sources */,

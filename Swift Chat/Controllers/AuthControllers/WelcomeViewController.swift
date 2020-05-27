@@ -12,9 +12,9 @@ class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var logInButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func registerButtonPressed(_ sender: UIButton) {

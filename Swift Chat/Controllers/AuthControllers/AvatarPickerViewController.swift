@@ -13,27 +13,27 @@ import ProgressHUD
 class AvatarPickerViewController: UIViewController {
 
     @IBOutlet weak var avatarImage: UIImageView!
+    private let imageManager = ImagePickerManager()
     
-    var newImage: UIImage? = nil
-    var profilePicLink: String?
+    private var selectedImage: UIImage? = nil
+    private var profilePicLink: String?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         avatarImage.layer.cornerRadius = 120
-        
-
     }
     
+//MARK: - Select Avatar action
     @IBAction func pickImagePressed(_ sender: UIButton) {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        picker.delegate = self
-        self.present(picker, animated: true, completion: nil)
+        imageManager.pickImage(from: self) {[weak self] image in
+          self?.avatarImage.image = image
+          self?.selectedImage = image
+        }
     }
+    
+//MARK: - Complete action
     
     @IBAction func completeButtonPressed(_ sender: UIButton) {
-        
         firestorageService()
     }
     
@@ -41,7 +41,7 @@ class AvatarPickerViewController: UIViewController {
         
         if let userID = NetworkParameters().currentUserID() {
             ProgressHUD.show(nil, interaction: false)
-            guard let imageData = newImage?.scale(to: CGSize(width: 60, height: 60))?.jpegData(compressionQuality: 0.4)
+            guard let imageData = selectedImage?.scale(to: CGSize(width: 60, height: 60))?.jpegData(compressionQuality: 0.4)
                 else {return}
             let ref = Storage.storage().reference().child("user").child(userID).child(userID + ".jpg")
             let metadata = StorageMetadata()
@@ -67,22 +67,6 @@ class AvatarPickerViewController: UIViewController {
             }
         }
         
-    }
-    
-}
-
-extension AvatarPickerViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageSelected = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            newImage = imageSelected
-            avatarImage.image = imageSelected
-        }
-        if let imageOriginal = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            newImage = imageOriginal
-            avatarImage.image = imageOriginal
-        }
-        picker.dismiss(animated: true, completion: nil)
     }
     
 }
